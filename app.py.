@@ -1,52 +1,5 @@
+
 import streamlit as st
-import itertools
 
-# --- ΡΥΘΜΙΣΕΙΣ ---
-st.set_page_config(page_title="BigBet Tool", layout="centered")
-PASSWORD = "ο_κωδικός_σου" # ΑΛΛΑΞΕ ΤΟ
-
-# --- ΕΛΕΓΧΟΣ ΠΡΟΣΒΑΣΗΣ ---
-if "login" not in st.session_state:
-    st.session_state.login = False
-
-if not st.session_state.login:
-    st.header("🔒 Είσοδος")
-    user_pass = st.text_input("Κωδικός", type="password")
-    if st.button("Είσοδος"):
-        if user_pass == PASSWORD:
-            st.session_state.login = True
-            st.rerun()
-        else:
-            st.error("Λάθος κωδικός")
-    st.stop()
-
-# --- ΚΥΡΙΩΣ ΕΦΑΡΜΟΓΗ ---
-st.title("⚽ My Private Betting App")
-
-# 1. Εισαγωγή Αγώνων
-st.header("1. Προσθήκη Αγώνων")
-input_data = st.text_area("Γράψε τους αγώνες (έναν σε κάθε γραμμή)", 
-                         placeholder="π.χ. Ολυμπιακός-ΠΑΟΚ")
-
-# 2. Επιλογή Συστήματος
-if input_data:
-    matches = input_data.split('\n')
-    matches = [m.strip() for m in matches if m.strip()]
-    
-    st.header("2. Ρυθμίσεις Συστήματος")
-    k = st.number_input("Σύστημα (π.χ. 3άδες, 4άδες)", min_value=1, max_value=len(matches), value=min(3, len(matches)))
-    
-    if st.button("Ανάπτυξη Στηλών"):
-        all_combinations = list(itertools.combinations(matches, k))
-        
-        st.success(f"Δημιουργήθηκαν {len(all_combinations)} στήλες")
-        
-        # Εμφάνιση στηλών
-        txt_output = ""
-        for i, combo in enumerate(all_combinations, 1):
-            st_text = f"Στήλη {i}: {' - '.join(combo)}"
-            st.write(st_text)
-            txt_output += st_text + "\n"
-        
-        # Κουμπί για Εκτύπωση
-        st.download_button("📄 Λήψη για Εκτύπωση", txt_output, file_name="stiles.txt")
+st.title("Δοκιμή Επιτυχής!")
+st.write("Αν το βλέπεις αυτό, η εφαρμογή σου δουλεύει!")
